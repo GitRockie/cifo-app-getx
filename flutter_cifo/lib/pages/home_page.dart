@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cifo/services/movies_api_repository.dart';
 
 import '../services/movies_repository.dart';
 
@@ -13,6 +12,9 @@ class HomePage extends StatelessWidget {
         onPressed: () {
           MovieRepository().popularMovies();
         },
+        child: const Icon(
+          Icons.add,
+        ),
       ),
     );
   }

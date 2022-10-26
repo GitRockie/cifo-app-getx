@@ -8,16 +8,16 @@ import 'movie.dart';
 
 class PopularMovieResponse {
   PopularMovieResponse({
-    required this.page,
-    required this.results,
-    required this.totalPages,
-    required this.totalResults,
+    this.page,
+    this.results,
+    this.totalPages,
+    this.totalResults,
   });
 
-  int page;
-  List<Movie> results;
-  int totalPages;
-  int totalResults;
+  int? page;
+  List<Movie>? results;
+  int? totalPages;
+  int? totalResults;
 
   factory PopularMovieResponse.fromJson(String str) =>
       PopularMovieResponse.fromMap(json.decode(str));
