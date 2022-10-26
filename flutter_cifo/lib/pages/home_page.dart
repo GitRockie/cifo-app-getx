@@ -1,21 +1,42 @@
 import 'package:flutter/material.dart';
-
-import '../services/movies_repository.dart';
+import 'package:flutter_cifo/structure/controllers/movies_controller.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key, required String title});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    MoviesController moviesController = Get.put(MoviesController());
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          MovieRepository().popularMovies();
-        },
-        child: const Icon(
-          Icons.add,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            await moviesController.getPopularMovieResponse();
+          },
+          child: const Icon(
+            Icons.add,
+          ),
         ),
-      ),
-    );
+        body: Obx(
+          () => ListView.builder(
+              itemCount:
+                  /*(moviesController.popularMoviesResponse.value.results == null)
+                      ? 0
+                      : moviesController
+                          .popularMoviesResponse.value.results!.length,*/
+                  moviesController
+                          .popularMoviesResponse.value.results?.length ??
+                      0,
+              itemBuilder: (context, index) {
+                return TextButton(
+                  onPressed: () {},
+                  child: Card(
+                    color: Colors.amber,
+                    child: Text(moviesController.popularMoviesResponse.value
+                        .results![index].originalTitle!),
+                  ),
+                );
+              }),
+        ));
   }
 }

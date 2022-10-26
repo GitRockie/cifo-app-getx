@@ -1,9 +1,3 @@
-// To parse this JSON data, do
-//
-//     final polularMovieResponse = polularMovieResponseFromMap(jsonString);
-
-import 'dart:convert';
-
 import 'movie.dart';
 
 class PopularMovieResponse {
@@ -19,14 +13,26 @@ class PopularMovieResponse {
   int? totalPages;
   int? totalResults;
 
-  factory PopularMovieResponse.fromJson(String str) =>
-      PopularMovieResponse.fromMap(json.decode(str));
+  PopularMovieResponse.fromJson(Map<String, dynamic> json) {
+    page = json['page'];
+    if (json['results'] != null) {
+      results = <Movie>[];
+      json['results'].forEach((v) {
+        results?.add(Movie.fromJson(v));
+      });
+    }
+    totalPages = json['total_pages'];
+    totalResults = json['total_results'];
+  }
 
-  factory PopularMovieResponse.fromMap(Map<String, dynamic> json) =>
-      PopularMovieResponse(
-        page: json["page"],
-        results: List<Movie>.from(json["results"].map((x) => Movie.fromMap(x))),
-        totalPages: json["total_pages"],
-        totalResults: json["total_results"],
-      );
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['page'] = page;
+    if (results != null) {
+      data['results'] = results?.map((v) => v.toJson()).toList();
+    }
+    data['total_pages'] = totalPages;
+    data['total_results'] = totalResults;
+    return data;
+  }
 }

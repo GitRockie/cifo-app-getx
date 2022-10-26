@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 class MoviesApiRepository {
   Future<http.Response> getReqResPopularMoivies() async {
     final Map<String, dynamic> queryParams = {
-      'api-key': '7547421028b942292827ce3ae9ab08f6',
+      'api_key': '7547421028b942292827ce3ae9ab08f6',
       'language': 'en-US',
       'page': '1'
     };
