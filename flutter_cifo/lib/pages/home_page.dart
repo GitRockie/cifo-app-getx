@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cifo/structure/controllers/movies_controller.dart';
 import 'package:get/get.dart';
 
+import '../routes/app_routes.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -29,11 +31,13 @@ class HomePage extends StatelessWidget {
                       0,
               itemBuilder: (context, index) {
                 return TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed(Routes.DETAILS);
+                  },
                   child: Card(
-                    color: Colors.amber,
-                    child: Text(moviesController.popularMoviesResponse.value
-                        .results![index].originalTitle!),
+                    color: Colors.pink,
+                    child: Text(moviesController
+                        .popularMoviesResponse.value.results![index].title!),
                   ),
                 );
               }),
